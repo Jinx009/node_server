@@ -1,9 +1,6 @@
 /**
  * Created by jinx on 7/7/17.
  */
-/**
- * Created by jinx on 7/7/17.
- */
 var http = require('http');
 
 var content = {
