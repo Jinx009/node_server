@@ -9,11 +9,11 @@ var connection = mysql.createConnection({
     port: '5492',
     database: 'base',
 });
+/**
+ * 获取用户数据
+ * @returns {string}
+ */
 module.exports = {
-    /**
-     * 获取数据
-     * @returns {string}
-     */
     users: function getUser(callback) {
         var sql = 'SELECT * FROM HOME_USER';
         connection.query(sql, function (err, result) {
@@ -24,8 +24,41 @@ module.exports = {
             callback(result);
         });
     }
-
 }
+
+/**
+ * 查询与删除
+ * @type {{saveOrDel: module.exports._saveOrDel}}
+ */
+module.exports = {
+    selectOrDelete: function _selectOrDelete(sql,callback) {
+        connection.query(sql, function (err, result) {
+            if (err) {
+                console.log('[saveOrDel ERROR] - ', err.message);
+                return;
+            }
+            callback(result);
+        });
+    }
+}
+
+/**
+ * 更新与新增
+ * @type {{updateOrInsert: module.exports._updateOrInsert}}
+ */
+module.exports = {
+    updateOrInsert: function _updateOrInsert(sql,params,callback) {
+        connection.query(sql,params, function (err, result) {
+            if (err) {
+                console.log('[updateOrInsert ERROR] - ', err.message);
+                return;
+            }
+            callback(result);
+        });
+    }
+}
+
+
 function handleDisconnect(connection) {
     connection.on('error', function (err) {
         if (!err.fatal) {

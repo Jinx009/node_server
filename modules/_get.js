@@ -22,5 +22,31 @@ module.exports = {
                 }
             });
         });
+    },
+
+    /**
+     * 通用get方法
+     * @param _url
+     * @param cb
+     */
+    getData:function(_url,cb){
+        http.get(_url, function (res) {
+            res.setEncoding('utf8');
+            var rawData = '';
+            res.on('data', function (chunk) {
+                rawData += chunk;
+            });
+            res.on('end', function () {
+                try {
+                    const parsedData = JSON.parse(rawData);
+                    cb(parsedData);
+                    console.log(parsedData);
+                } catch (e) {
+                    cb('error');
+                    console.error(e.message);
+                }
+            });
+        });
     }
+
 }
