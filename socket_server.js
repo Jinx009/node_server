@@ -1,27 +1,16 @@
-/**
- * Created by jinx on 7/12/17.
- */
-var app = require('express')();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var port = process.env.PORT || 3000;
+var ws = require('nodejs-websocket');
+console.log('开始建立连接...')
 
-app.get('/', function (req, res) {
-    console.log(__dirname);
-    res.sendFile(__dirname + '/views/socket.html');
-});
-
-io.on('connection', function (socket) {
-    io.emit('message', 'hello');
-    setInterval(function () {
-        io.emit('message', Math.random());
-    }, 3000);
-    socket.on('message', function (msg) {
-        console.log(msg);
-        io.emit('message', msg);
+ws.createServer(function (conn) {
+    conn.on('text', function (str) {
+        console.log('收到的信息为:' + str)
+        conn.sendText(str)
+    })
+    conn.on('close', function (code, reason) {
+        console.log('关闭连接', code, reason)
     });
-});
-
-http.listen(port, function () {
-    console.log('listening on *:' + port);
-});
+    conn.on('error', function (code, reason) {
+        console.log('异常关闭', code, reason)
+    });
+}).listen(8001)
+console.log('WebSocket建立完毕');

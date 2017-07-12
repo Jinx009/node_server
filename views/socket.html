@@ -1,39 +1,59 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-    <title>Socket.IO chat</title>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font: 13px Helvetica, Arial; }
-        form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-        form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-        form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
-        #messages { list-style-type: none; margin: 0; padding: 0; }
-        #messages li { padding: 5px 10px; }
-        #messages li:nth-child(odd) { background: #eee; }
-        #messages { margin-bottom: 40px }
+        #mess {
+            text-align: center
+        }
+
+        .value {
+            width: 200px;
+            height: 200px;
+            border: 1px solid;
+            text-align: center;
+            line-height: 200px;
+            display: inline-block;
+        }
+
+        .box {
+            text-align: center;
+            margin-top: 200px;
+        }
     </style>
 </head>
 <body>
-<ul id="messages"></ul>
-<form action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
-</form>
-<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<div id="mess">正在连接...</div>
+<div class="box">
+    <div class="value" id="value1">OPPO R9</div>
+    <div class="value" id="value2">VIVO X9</div>
+    <div class="value" id="value3">IPHONE8 PLUS</div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 <script>
-    $(function () {
-        var socket = io();
-        $('form').submit(function(){
-            socket.emit('message', $('#m').val());
-            $('#m').val('');
-            return false;
-        });
-        socket.on('message', function(msg){
-            $('#messages').append($('<li>').text(msg));
-            window.scrollTo(0, document.body.scrollHeight);
-        });
-    });
+    if (window.WebSocket) {
+        var ws = new WebSocket('ws://127.0.0.1:8001');
+
+        ws.onopen = function () {
+            console.log('连接服务器成功');
+            ws.send('startting...');
+        }
+        ws.onclose = function () {
+            console.log('服务器关闭');
+        }
+        ws.onerror = function () {
+            console.log("连接出错");
+        }
+
+        ws.onmessage = function (e) {
+            document.querySelector(".box").onclick = function (e) {
+                ws.send('当前点击框的内容为:<font style="color:red;" >' + e.target.innerHTML+'</font>');
+            }
+            $('#mess').append(e.data + '</br>');
+        }
+    }
 </script>
 </body>
 </html>
