@@ -2,12 +2,13 @@
  * Created by jinx on 7/7/17.
  */
 var mysql = require('mysql');
+var sd = require('silly-datetime');
 var connection = mysql.createConnection({
-    host: '56f34b014db7d.sh.cdb.myqcloud.com',
+    host: '59647813aaa48.sh.cdb.myqcloud.com',
     user: 'test_user',
     password: 'Jinx0007',
-    port: '5492',
-    database: 'base',
+    port: '15955',
+    database: 'test',
 });
 /**
  * 获取用户数据
@@ -24,6 +25,23 @@ module.exports = {
             callback(result);
         });
     }
+}
+
+module.exports = {
+    insertIoT : function insertIoT(obj,callback){
+        var time = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+        var  _addSql = 'INSERT INTO tbl_sensor_operationlog(available,mac,change_time,create_time) VALUES(?,?,?,?)';
+        var  _addParams = [obj.value, obj.mac,time,time];
+        connection.query(_addSql,_addParams,function (err, result) {
+            if(err){
+                console.log('[INSERT ERROR] - ',err.message);
+                return;
+            }
+            console.log('-------INSERT----------');
+            callback(result);
+        });
+    }
+
 }
 
 /**
