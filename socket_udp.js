@@ -19,6 +19,8 @@ server.on('error', (err) => {
 server.on('message', (msg, rinfo) => {
     try {
         msg = buffToStr(msg)
+        var _msg = JSON.stringify(msg);
+        console.log('服务器收到原始数据：'+_msg+'来自'+rinfo.address+':'+rinfo.port);
         msg = getJson(msg);
         if('48'==msg.type&&'30'==msg.method)
         insertIoT(msg,function (data) {
@@ -30,7 +32,7 @@ server.on('message', (msg, rinfo) => {
                         console.log(err);
                     }
                 });
-                console.log(`服务器收到状态：${msg} 来自 ${rinfo.address}:${rinfo.port}`);
+                console.log(`服务器收到解析后数据：${msg} 来自 ${rinfo.address}:${rinfo.port}`);
             }
         });
     }catch (e){

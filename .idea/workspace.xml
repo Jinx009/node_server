@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b386dc62-45d7-4916-a0af-39125c6bdaa3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/log.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/socket_udp.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/modules/_mysql.js" afterPath="$PROJECT_DIR$/modules/_mysql.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/socket_udp.js" afterPath="$PROJECT_DIR$/socket_udp.js" />
     </list>
     <ignored path="node_server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,8 +39,8 @@
       <file leaf-file-name="socket_udp.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/socket_udp.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="580">
-              <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+            <state relative-caret-position="400">
+              <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -422,12 +420,12 @@
       <workItem from="1500019096764" duration="540000" />
       <workItem from="1500446190989" duration="161000" />
       <workItem from="1500523088895" duration="1504000" />
-      <workItem from="1500525173683" duration="5841000" />
+      <workItem from="1500525173683" duration="7452000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41328000" />
+    <option name="totallyTimeSpent" value="42939000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="838" extended-state="6" />
@@ -704,6 +702,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="12" column="4" selection-start-line="12" selection-start-column="4" selection-end-line="12" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -736,6 +735,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
           <caret line="0" column="11503" selection-start-line="0" selection-start-column="11503" selection-end-line="0" selection-end-column="11503" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -789,8 +789,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/socket_udp.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="580">
-          <caret line="105" column="0" selection-start-line="105" selection-start-column="0" selection-end-line="105" selection-end-column="0" />
+        <state relative-caret-position="400">
+          <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
           <folding />
         </state>
       </provider>
