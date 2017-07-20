@@ -22,19 +22,20 @@ server.on('message', (msg, rinfo) => {
         var _msg = JSON.stringify(msg);
         console.log('服务器收到原始数据：'+_msg+'来自'+rinfo.address+':'+rinfo.port);
         msg = getJson(msg);
-        if('48'==msg.type&&'30'==msg.method)
-        insertIoT(msg,function (data) {
-            if(data){
-                var time = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
-                msg = JSON.stringify(msg)+'----'+time+'\n';
-                fs.appendFile('log.txt', msg, 'utf8', function (err) {
-                    if (err) {
-                        console.log(err);
-                    }
-                });
-                console.log(`服务器收到解析后数据：${msg} 来自 ${rinfo.address}:${rinfo.port}`);
-            }
-        });
+        if('48'==msg.type&&'30'==msg.method) {
+            insertIoT(msg, function (data) {
+                if (data) {
+                    var time = sd.format(new Date(), 'YYYY-MM-DD HH:mm:ss');
+                    msg = JSON.stringify(msg) + '----' + time + '\n';
+                    fs.appendFile('log.txt', msg, 'utf8', function (err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+                    console.log(`服务器收到状态：${msg} 来自 ${rinfo.address}:${rinfo.port}`);
+                }
+            });
+        }
     }catch (e){
         console.log('服务器接收出错:'+e);
     }
