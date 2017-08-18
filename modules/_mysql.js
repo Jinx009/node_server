@@ -46,7 +46,7 @@ module.exports = {
 
 /**
  * 查询与删除
- * @type {{saveOrDel: module.exports._saveOrDel}}
+ * @type {{selectOrDelete: module.exports._selectOrDelete}}
  */
 module.exports = {
     selectOrDelete: function _selectOrDelete(sql,callback) {

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>NB-IoT's page</title>
+    <link href="https://cdn.bootcss.com/layer/3.0.1/mobile/need/layer.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="main" style="min-height: 300px;height: 300px;">
+
+</div>
+<div id="footer" ></div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcss.com/layer/3.0.1/mobile/layer.js"></script>
+<script>
+    function _main() {
+        setInterval(function(){
+            var date = new Date();
+            var dateStr = date.getTime();
+            Ajax('node_file/log.txt?datetime='+dateStr, function (str) {
+                $('.main').html('<pre>'+str+'</pre>');
+                window.location = '#footer';
+            }, function () {
+            })
+        },20000);
+    }
+
+    $(function () {
+        var date = new Date();
+        var dateStr = date.getTime();
+        Ajax('node_file/log.txt?datetime='+dateStr, function (str) {
+            $('.main').html('<pre>'+str+'</pre>');
+            window.location = '#footer';
+        }, function () {
+        })
+        _main();
+    })
+    function Ajax(url, fnSucc, fnFaild) {
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            var oAjax = new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            var oAjax = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        oAjax.open('GET', url, true);
+        oAjax.send();
+        oAjax.onreadystatechange = function () {
+            if (oAjax.readyState == 4) {
+                if (oAjax.status == 200) {
+                    fnSucc(oAjax.responseText);
+                }
+                else {
+                    fnFaild(oAjax.status);
+                }
+            }
+            ;
+        };
+    }
+</script>
+</body>
+</html>
