@@ -1,0 +1,55 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>WebSocket Echo Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="md5.js" ></script>
+</head>
+
+<body >
+<script>
+    var _md_str = {appEUI:'000000000000006c',User_Sec:'a7da4728e374343d37021e4be5593311',time_s:'1504774928'};
+    var _md = hex_md5(_md_str.time_s+_md_str.appEUI+_md_str.User_Sec);
+    console.log(_md);
+    var str = 'ws://www.guodongiot.com:92/webs?appEUI='+_md_str.appEUI+'&token='+_md+'&time_s='+_md_str.time_s;
+    var ws = new WebSocket(str);
+    // 打开Socket
+    ws.onopen = function(event) {
+
+        // 发送一个初始化消息
+        ws.send('I am the client and I\'m listening!');
+
+        // 监听消息
+        ws.onmessage = function(event) {
+            console.log('Client received a message',JSON.parse(event.data));
+            var _data = JSON.parse(event.data).data;
+            var _mac = JSON.parse(event.data).devEUI;
+            sendData(_data,_mac);
+        };
+
+        // 监听Socket的关闭
+        ws.onclose = function(event) {
+            console.log('Client notified socket has closed',event);
+        };
+
+        // 关闭Socket....
+        //socket.close()
+    };
+    function hexToString(str){
+        var val="";
+        var arr = str.split(",");
+        for(var i = 0; i < arr.length; i++){
+            val += arr[i].fromCharCode(i);
+        }
+        return val;
+    }
+    function sendData(_data,_mac){
+        var _arr = _data.split('');
+        if(_arr[7]=='0'){
+            console.log(_arr[_arr.length-1]);
+        }
+        console.log(_arr);
+    }
+</script>
+</body>
+</html>
